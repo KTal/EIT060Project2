@@ -1,7 +1,6 @@
+package medicalRecords;
 
 public class UserCredentials 
 {
-	Patient,
-	Doctor,
 	
 }

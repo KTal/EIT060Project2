@@ -1,3 +1,4 @@
+package medicalRecords;
 
 public enum UserCategory 
 {
