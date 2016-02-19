@@ -1,4 +1,7 @@
 
-public class UserCredentials {
-
+public class UserCredentials 
+{
+	Patient,
+	Doctor,
+	
 }
