@@ -2,6 +2,7 @@ package medicalRecords;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 public class Patient
 {
@@ -20,6 +21,64 @@ public class Patient
 		this.address = address;
 		this.phoneNbr = phoneNbr;
 		this.treatingDoctors = treatingDoctors;
+		lastRunningNbr = 0;
+	}
+	
+	public void addMedicalRecord(MedicalRecord mr)
+	{
+		lastRunningNbr++;
+		mr.setRunningNbr(lastRunningNbr);
+		mrList.add(mr);
+	}
+	
+	public TransactionResult deleteMedicalRecord(int runningNbr)
+	{
+		for(ListIterator<MedicalRecord> i = mrList.listIterator(); i.hasNext(); ) 
+		{
+		    MedicalRecord mr = i.next();
+		    if( mr.getRunningNbr() == runningNbr)
+		    {
+		    	i.remove();
+		    	return TransactionResult.DeleteSucceeded;
+		    }
+		}
+		return TransactionResult.DeleteFailed;
+	}
+	
+	public TransactionResult appendToMedicalRecord(int runningNbr, String appendNote)
+	{
+		for(ListIterator<MedicalRecord> i = mrList.listIterator(); i.hasNext(); ) 
+		{
+		    MedicalRecord mr = i.next();
+		    if( mr.getRunningNbr() == runningNbr)
+		    {
+		    	String oldNote = mr.getNote().concat("\n");
+		    	String newNote = oldNote.concat(appendNote);
+		    	mr.setNote(newNote);
+		    	i.set(mr);
+		    	
+		    	return TransactionResult.AppendSucceeded;
+		    }
+		}
+		return TransactionResult.AppendFailed;
+	}
+	
+	public MedicalRecord findMedicalRecord(int runningNbr)
+	{
+		for(ListIterator<MedicalRecord> i = mrList.listIterator(); i.hasNext(); ) 
+		{
+		    MedicalRecord mr = i.next();
+		    if( mr.getRunningNbr() == runningNbr)
+		    {
+		    	return mr;
+		    }
+		}
+		return null;
+	}
+	
+	public ArrayList<MedicalRecord> getMedicalRecords()
+	{
+		return mrList;
 	}
 	
 	public String toString()
@@ -44,6 +103,5 @@ public class Patient
 		}
 		
 		return sb.toString();
-	}
-	
+	}	
 }
