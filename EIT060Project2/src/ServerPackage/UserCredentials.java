@@ -1,4 +1,4 @@
-package medicalRecords;
+package ServerPackage;
 
 public class UserCredentials 
 {
