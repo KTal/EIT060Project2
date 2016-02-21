@@ -24,6 +24,24 @@ public class Patient
 		lastRunningNbr = 0;
 	}
 	
+	public String getSocialSecNo()
+	{
+		return socialSecNo;
+	}
+	
+	public Boolean isTreatingDoctor(String name)
+	{
+		for(ListIterator<String> i = treatingDoctors.listIterator(); i.hasNext(); ) 
+		{
+		   String doctor = i.next();
+		    if( doctor.equals(name))
+		    {
+		    	return true;
+		    }
+		}
+		return false;
+	}
+	
 	public void addMedicalRecord(MedicalRecord mr)
 	{
 		lastRunningNbr++;
