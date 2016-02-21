@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
 
+import auditing.Logger;
+
 public class Patient
 {
 	String socialSecNo;
@@ -42,29 +44,46 @@ public class Patient
 		return false;
 	}
 	
-	public void addMedicalRecord(MedicalRecord mr)
+	public void addMedicalRecord(MedicalRecord mr, Logger log)
 	{
 		lastRunningNbr++;
 		mr.setRunningNbr(lastRunningNbr);
 		mrList.add(mr);
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Added medical record for patient " + this.socialSecNo);
+		sb.append(" " + this.patientName + "\n");
+		sb.append(mr.toString());
+		log.writeLog(sb.toString());
 	}
 	
-	public TransactionResult deleteMedicalRecord(int runningNbr)
+	public TransactionResult deleteMedicalRecord(int runningNbr, Logger log)
 	{
+		StringBuilder sb = new StringBuilder();
+		
 		for(ListIterator<MedicalRecord> i = mrList.listIterator(); i.hasNext(); ) 
 		{
 		    MedicalRecord mr = i.next();
 		    if( mr.getRunningNbr() == runningNbr)
 		    {
 		    	i.remove();
+		    	sb.append("Deleted medical record " + Integer.toString(runningNbr));
+		    	sb.append(" for patient " + this.socialSecNo);
+		    	log.writeLog(sb.toString());
 		    	return TransactionResult.DeleteSucceeded;
 		    }
 		}
+		sb.append("Failed to delete medical record " + Integer.toString(runningNbr));
+    	sb.append(" for patient " + this.socialSecNo);
+    	log.writeLog(sb.toString());
 		return TransactionResult.DeleteFailed;
 	}
 	
-	public TransactionResult appendToMedicalRecord(int runningNbr, String appendNote)
+	public TransactionResult appendToMedicalRecord(int runningNbr, 
+			String appendNote, Logger log)
 	{
+		StringBuilder sb = new StringBuilder();
+		
 		for(ListIterator<MedicalRecord> i = mrList.listIterator(); i.hasNext(); ) 
 		{
 		    MedicalRecord mr = i.next();
@@ -75,14 +94,24 @@ public class Patient
 		    	mr.setNote(newNote);
 		    	i.set(mr);
 		    	
+		    	sb.append("Appended " + appendNote);
+		    	sb.append(" to medical record " + Integer.toString(runningNbr));
+		    	sb.append(" for patient " + this.socialSecNo);
+		    	log.writeLog(sb.toString());
+		    	
 		    	return TransactionResult.AppendSucceeded;
 		    }
 		}
+		sb.append("Failed to append to medical record " + Integer.toString(runningNbr));
+    	sb.append(" for patient " + this.socialSecNo);
+    	log.writeLog(sb.toString());
 		return TransactionResult.AppendFailed;
 	}
 	
-	public MedicalRecord findMedicalRecord(int runningNbr)
+	public MedicalRecord findMedicalRecord(int runningNbr, Logger log)
 	{
+		StringBuilder sb = new StringBuilder();
+		
 		for(ListIterator<MedicalRecord> i = mrList.listIterator(); i.hasNext(); ) 
 		{
 		    MedicalRecord mr = i.next();
@@ -91,6 +120,9 @@ public class Patient
 		    	return mr;
 		    }
 		}
+		sb.append("Could not find medical record " + Integer.toString(runningNbr));
+		sb.append(" for patient " + this.socialSecNo);
+		log.writeLog(sb.toString());
 		return null;
 	}
 	
@@ -105,7 +137,6 @@ public class Patient
 		sb.append("SocialSecNo: " + socialSecNo + "\n");
 		sb.append("Patient name: " + patientName + "\n");
 		sb.append("Patient address: " + address + "\n");
-		sb.append("Patient phone no: " + phoneNbr + "\n");
 		sb.append("Patient phone no: " + phoneNbr + "\n");
 		
 		for(Iterator<String> i = treatingDoctors.iterator(); i.hasNext(); ) 

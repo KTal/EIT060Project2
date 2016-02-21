@@ -1,5 +1,6 @@
 package ServerPackage;
 
+import auditing.Logger;
 import medicalRecords.MedicalRecord;
 import medicalRecords.Patient;
 
@@ -9,14 +10,16 @@ public class CredentialChecker
 	UserCredentials uc;
 	Patient pat;
 	MedicalRecord mr;
+	Logger log;
 	
 	public CredentialChecker(TransactionType tt, UserCredentials uc, Patient pat,
-			MedicalRecord mr)
+			MedicalRecord mr, Logger log)
 	{
 		this.tt = tt;
 		this.uc = uc;
 		this.pat = pat;
 		this.mr = mr;
+		this.log = log;
 	}
 	
 	public Boolean checkCredentials()
@@ -98,9 +101,35 @@ public class CredentialChecker
 				break;
 		}
 		
-		// ToDo
-		// Log result of checkCredentials
-		
+		createMessage(accessGranted);
 		return accessGranted;
 	}
+	
+	private void createMessage(Boolean accessGranted)
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		if(accessGranted)
+		{
+			sb.append("Access granted: ");
+		}
+		else
+		{
+			sb.append("Access denied: ");
+		}
+		sb.append(tt.toString() + " for patient " + pat.getSocialSecNo());
+		sb.append(" requested by " + uc.getUserID() + " ");
+		sb.append(uc.getUc().toString() + " ");
+		if(uc.getUc()== UserCategory.Doctor || uc.getUc()== UserCategory.Nurse)
+		{
+			sb.append(uc.getName() + " in department " + uc.getDepartment());
+		}
+		else if(uc.getUc()== UserCategory.Patient)
+		{
+			sb.append(uc.getSocialSecNo());
+		}
+		
+		log.writeLog(sb.toString());
+	}
+	
 }
