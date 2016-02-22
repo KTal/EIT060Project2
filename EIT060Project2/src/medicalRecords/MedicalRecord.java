@@ -7,13 +7,13 @@ import java.util.Date;
 public class MedicalRecord 
 {
 	int runningNbr;
-	Date date;
+	String date;
 	String department;
 	String doctorName;
 	String nurseName;
 	String note;
 	
-	public MedicalRecord(Date date, String department, 
+	public MedicalRecord(String date, String department, 
 			String doctorName, String nurseName, String note) 
 	{
 		this.runningNbr = 0;
@@ -24,7 +24,7 @@ public class MedicalRecord
 		this.note = note;
 	}
 
-	public Date getDate() 
+	public String getDate() 
 	{
 		return date;
 	}
