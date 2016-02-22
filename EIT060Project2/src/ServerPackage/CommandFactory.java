@@ -35,14 +35,14 @@ public class CommandFactory
 						mr = checkMedicalRecordSyntax(commandParts);
 						if(mr != null)
 						{
-							com = new NewMedRecCommand(uc, pat, mr);
+							com = new NewMedRecCommand(uc, pat, mr, log);
 							commandOK = true;
 						}
 					}
 					break;
 
 				case "R":				
-					com = new ReadMedRecCommand(uc, pat);
+					com = new ReadMedRecCommand(uc, pat, log);
 					commandOK = true;
 					break;
 
@@ -62,7 +62,8 @@ public class CommandFactory
 							mr = pat.findMedicalRecord(runningNbr, log);
 							if(mr != null)
 							{
-								com = new DeleteMedRecCommand(uc, pat, runningNbr);
+								com = new DeleteMedRecCommand(uc, pat, runningNbr,
+										log);
 								commandOK = true;
 							}
 						}
@@ -85,8 +86,8 @@ public class CommandFactory
 							mr = pat.findMedicalRecord(runningNbr, log);
 							if(mr != null)
 							{
-								com = new UpdateMedRecCommand(uc, pat, runningNbr, 
-										commandParts[3]);
+								com = new UpdateMedRecCommand(uc, pat, mr,
+										runningNbr, commandParts[3], log);
 								commandOK = true;
 							}
 						}

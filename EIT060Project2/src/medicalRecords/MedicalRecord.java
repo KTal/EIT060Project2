@@ -2,7 +2,6 @@ package medicalRecords;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MedicalRecord 
 {

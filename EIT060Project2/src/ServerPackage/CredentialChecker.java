@@ -6,23 +6,26 @@ import medicalRecords.Patient;
 
 public class CredentialChecker 
 {
-	TransactionType tt;
 	UserCredentials uc;
 	Patient pat;
 	MedicalRecord mr;
 	Logger log;
 	
-	public CredentialChecker(TransactionType tt, UserCredentials uc, Patient pat,
+	public CredentialChecker(UserCredentials uc, Patient pat,
 			MedicalRecord mr, Logger log)
 	{
-		this.tt = tt;
 		this.uc = uc;
 		this.pat = pat;
 		this.mr = mr;
 		this.log = log;
 	}
 	
-	public Boolean checkCredentials()
+	public Boolean checkCredentials(TransactionType tt)
+	{
+		return checkCredentials(tt, false);
+	}
+	
+	public Boolean checkCredentials(TransactionType tt, Boolean logOff)
 	{
 		Boolean accessGranted = false;
 		
@@ -101,11 +104,14 @@ public class CredentialChecker
 				break;
 		}
 		
-		createMessage(accessGranted);
+		if(!logOff)
+		{
+			createMessage(accessGranted, tt);
+		}
 		return accessGranted;
 	}
 	
-	private void createMessage(Boolean accessGranted)
+	private void createMessage(Boolean accessGranted, TransactionType tt)
 	{
 		StringBuilder sb = new StringBuilder();
 		

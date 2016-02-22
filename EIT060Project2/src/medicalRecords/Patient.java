@@ -44,7 +44,7 @@ public class Patient
 		return false;
 	}
 	
-	public void addMedicalRecord(MedicalRecord mr, Logger log)
+	public TransactionResult addMedicalRecord(MedicalRecord mr, Logger log)
 	{
 		lastRunningNbr++;
 		mr.setRunningNbr(lastRunningNbr);
@@ -55,6 +55,7 @@ public class Patient
 		sb.append(" " + this.patientName + "\n");
 		sb.append(mr.toString());
 		log.writeLog(sb.toString());
+		return TransactionResult.CreateSucceeded;
 	}
 	
 	public TransactionResult deleteMedicalRecord(int runningNbr, Logger log)

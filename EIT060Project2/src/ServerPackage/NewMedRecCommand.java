@@ -1,26 +1,40 @@
 package ServerPackage;
 
+import auditing.Logger;
 import medicalRecords.MedicalRecord;
 import medicalRecords.Patient;
+import medicalRecords.TransactionResult;
 
 public class NewMedRecCommand implements Command
 {
 	UserCredentials uc;
 	Patient pat;
 	MedicalRecord mr;
+	Logger log;
 
-	public NewMedRecCommand(UserCredentials uc, Patient pat, MedicalRecord mr)
+	public NewMedRecCommand(UserCredentials uc, Patient pat, MedicalRecord mr, 
+			Logger log)
 	{
 		this.uc = uc;
 		this.pat = pat;
 		this.mr = mr;
+		this.log = log;
 	}
 		
 	@Override
-	public void execute() 
+	public String execute() 
 	{
-		// TODO Auto-generated method stub
-		
+		CredentialChecker cc = new CredentialChecker(uc, pat, mr, log);
+
+		if(cc.checkCredentials(TransactionType.New))
+		{
+			TransactionResult tr = pat.addMedicalRecord(mr, log);
+			return "N#" + tr.toString() + "#";			
+		}
+		else
+		{
+			return "N#Access denied.#";
+		}	
 	}
 
 }
