@@ -6,6 +6,8 @@ import javax.security.cert.X509Certificate;
 import java.security.KeyStore;
 import java.security.cert.*;
 import java.math.BigInteger;
+import java.io.Console;
+
 
 /*
  * This example shows how to set up a key manager to perform client
@@ -62,9 +64,8 @@ public class Client {
 		FileInputStream keytest = new FileInputStream(userkey); //one option is clientkeystore atm!
 		FileInputStream trusttest = new FileInputStream(usertrust);
 
-		System.out.println("Give password: ");
-		String passinput = passcheck.readLine();	//VI ANTAR här också att password är samma till key och trust
-		char[] password = passinput.toCharArray();
+		Console cons1 = System.console();
+		char[] password = cons1.readPassword("Give Password: ");
 		
                 ks.load(keytest, password);  // keystore password (storepass)
 				ts.load(trusttest, password); // truststore password (storepass);
