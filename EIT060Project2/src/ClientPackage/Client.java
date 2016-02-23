@@ -65,7 +65,7 @@ public class Client {
 		FileInputStream trusttest = new FileInputStream(usertrust);
 
 		Console cons1 = System.console();
-		char[] password = cons1.readPassword("Give Password: ");
+		char[] password = cons1.readPassword("Give Password:\n");
 		
                 ks.load(keytest, password);  // keystore password (storepass)
 				ts.load(trusttest, password); // truststore password (storepass);
