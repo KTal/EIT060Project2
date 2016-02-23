@@ -12,7 +12,7 @@ Jag har gjort ett antagande om att våra klient keystores och truststore kommer 
 
 Username + keystore/truststore.
 
-Det som skall göras härnäst är att se om vi kan få någon check på certifikatet från serversidan och sen möjligen ge access ifrån detta.
+Det verjar som att certificate check redan finns i koden från projekt 1.
 
 }}} Petter
 
