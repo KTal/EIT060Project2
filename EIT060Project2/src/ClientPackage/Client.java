@@ -38,14 +38,36 @@ public class Client {
         try { /* set up a key manager for client authentication */
             SSLSocketFactory factory = null;
             try {
-                char[] password = "password".toCharArray();
+                               //char[] password = "password".toCharArray();
                 KeyStore ks = KeyStore.getInstance("JKS");
                 KeyStore ts = KeyStore.getInstance("JKS");
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
                 TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
                 SSLContext ctx = SSLContext.getInstance("TLS");
-                ks.load(new FileInputStream("clientkeystore"), password);  // keystore password (storepass)
-				ts.load(new FileInputStream("clienttruststore"), password); // truststore password (storepass);
+		
+		//Here we "load" the keycard and check the password
+		//Since we don't actually have real keycards it is represented by just using client key/trust-stores
+
+		System.out.println("Read Keycard (Which in this case means give username):");
+		BufferedReader passcheck = new BufferedReader(new InputStreamReader(System.in)); //So we can get input
+		String username = passcheck.readLine();	
+		//VI gör antagande att både trust/key store är username + truststore/keystore
+		String userkey = new StringBuilder(username).append("keystore").toString();
+		String usertrust = new StringBuilder(username).append("truststore").toString();
+		System.out.println("So keystore is: " + userkey + "\n" + "And Truststore is: " + usertrust);
+
+		//Dessa är flyttade hit för att testa direkt ifall trust/key stores existerar.
+		FileInputStream keytest = new FileInputStream(userkey); //one option is clientkeystore atm!
+		FileInputStream trusttest = new FileInputStream(usertrust);
+
+		System.out.println("Give password: ");
+		String passinput = passcheck.readLine();	//VI ANTAR här också att password är samma till key och trust
+		char[] password = passinput.toCharArray();
+		
+		passcheck.close();	//Closing the input
+
+                ks.load(keytest, password);  // keystore password (storepass)
+				ts.load(trusttest, password); // truststore password (storepass);
 				kmf.init(ks, password); // user password (keypass)
 				tmf.init(ts); // keystore can be used as truststore here
 				ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
