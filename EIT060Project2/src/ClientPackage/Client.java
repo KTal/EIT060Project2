@@ -103,7 +103,7 @@ public class client {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String msg;
-	    System.out.println("Welcome person of yet undetermined security level");
+	    System.out.println("Welcome " + in.readLine());
 	    while(true) {
 		System.out.println("What would you like to do?\nN - Add journalstuff\nL - Read info\nU - Uppdate stuff\nR - Remove\nQ - Quit");
 		System.out.print(">> ");                
