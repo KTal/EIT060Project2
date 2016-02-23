@@ -1,4 +1,3 @@
-package ClientPackage;
 import java.net.*;
 import java.io.*;
 import javax.net.ssl.*;
@@ -8,7 +7,6 @@ import java.security.cert.*;
 import java.math.BigInteger;
 import java.io.Console;
 
-
 /*
  * This example shows how to set up a key manager to perform client
  * authentication.
@@ -17,7 +15,7 @@ import java.io.Console;
  * The application can be modified to connect to a server outside
  * the firewall by following SSLSocketClientWithTunneling.java.
  */
-public class Client {
+public class client {
 
     public static void main(String[] args) throws Exception {
         String host = null;
@@ -39,8 +37,8 @@ public class Client {
 
         try { /* set up a key manager for client authentication */
             SSLSocketFactory factory = null;
-            //Här har det gjorts en del förändringar!
             try {
+                //char[] password = "password".toCharArray();
                 KeyStore ks = KeyStore.getInstance("JKS");
                 KeyStore ts = KeyStore.getInstance("JKS");
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
@@ -53,28 +51,30 @@ public class Client {
 		System.out.println("Read Keycard (Which in this case means give username):");
 		BufferedReader passcheck = new BufferedReader(new InputStreamReader(System.in)); //So we can get input
 		String username = passcheck.readLine();	
+
 		//VI gör antagande att både trust/key store är username + truststore/keystore
 		String userkey = new StringBuilder(username).append("keystore").toString();
 		String usertrust = new StringBuilder(username).append("truststore").toString();
-		
-		//Endast här för testing reasons.
 		System.out.println("So keystore is: " + userkey + "\n" + "And Truststore is: " + usertrust);
 
 		//Dessa är flyttade hit för att testa direkt ifall trust/key stores existerar.
 		FileInputStream keytest = new FileInputStream(userkey); //one option is clientkeystore atm!
 		FileInputStream trusttest = new FileInputStream(usertrust);
-
+		
 		Console cons1 = System.console();
 		char[] password = cons1.readPassword("Give Password:\n");
-		
+
                 ks.load(keytest, password);  // keystore password (storepass)
 				ts.load(trusttest, password); // truststore password (storepass);
 				kmf.init(ks, password); // user password (keypass)
 				tmf.init(ts); // keystore can be used as truststore here
 				ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
                 factory = ctx.getSocketFactory();
+
             } catch (Exception e) {
-                throw new IOException(e.getMessage());
+		System.out.println("Incorrect User or Password");
+		System.exit(0);
+                //throw new IOException(e.getMessage());
             }
             SSLSocket socket = (SSLSocket)factory.createSocket(host, port);
             System.out.println("\nsocket before handshake:\n" + socket + "\n");
@@ -102,18 +102,17 @@ public class Client {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String msg;
-			for (;;) {
-                System.out.print(">");
-                msg = read.readLine();
-                if (msg.equalsIgnoreCase("quit")) {
-				    break;
-				}
-                System.out.print("sending '" + msg + "' to server...");
+	    System.out.println("Welcome person of yet undetermined security level");
+	    while(true) {
+		System.out.println("What would you like to do?\nN - Add journalstuff\nL - Read info\nU - Uppdate stuff\nR - Remove\nQ - Quit");
+		System.out.print(">> ");                
+		msg = read.readLine();
+                if (msg.equalsIgnoreCase("q")) {
+			break;
+		}
                 out.println(msg);
                 out.flush();
-                System.out.println("done");
-
-                System.out.println("received '" + in.readLine() + "' from server\n");
+                System.out.println(in.readLine() + '\n');
             }
             in.close();
 			out.close();
