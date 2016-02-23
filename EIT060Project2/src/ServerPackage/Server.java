@@ -1,5 +1,3 @@
-package ServerPackage;
-
 import java.io.*;
 import java.net.*;
 import java.security.KeyStore;
@@ -8,59 +6,73 @@ import javax.net.ssl.*;
 import javax.security.cert.X509Certificate;
 import java.math.BigInteger;
 
-public class Server implements Runnable {
+public class server implements Runnable {
     private ServerSocket serverSocket = null;
     private static int numConnectedClients = 0;
 
-    public Server(ServerSocket ss) throws IOException {
+    public server(ServerSocket ss) throws IOException {
         serverSocket = ss;
         newListener();
     }
-    
-    public void working() {
-    	System.out.println("Does it work"); //Does it work when i add stuff?
-    }
-    
+
     public void run() {
-        try {
-            SSLSocket socket=(SSLSocket)serverSocket.accept();
-            newListener();
-            SSLSession session = socket.getSession();
-            X509Certificate cert = (X509Certificate)session.getPeerCertificateChain()[0];
-            String subject = cert.getSubjectDN().getName();
-	    String issuer = cert.getIssuerDN().getName();  //THIS HAS BEEN ADDED!!!!
-   	    BigInteger serialnumber = cert.getSerialNumber(); //THIS HAS BEEN ADDED
-    	    numConnectedClients++;
-            System.out.println("client connected");
-            System.out.println("client name (cert subject DN field): " + subject);
-	    System.out.println("Issuer name (cert issuer DN field): " + issuer); //ALSO ADDED!!!!!!!!!
-	    System.out.println("Certificate serial number: " + serialnumber); //THIS IS ALSO ADDED!!!
-            System.out.println(numConnectedClients + " concurrent connection(s)\n");
+	try {
+		SSLSocket socket=(SSLSocket)serverSocket.accept();
+		newListener();
+		SSLSession session = socket.getSession();
+		X509Certificate cert = (X509Certificate)session.getPeerCertificateChain()[0];
+		String subject = cert.getSubjectDN().getName();
+		String issuer = cert.getIssuerDN().getName();  //THIS HAS BEEN ADDED!!!!
+		BigInteger serialnumber = cert.getSerialNumber(); //THIS HAS BEEN ADDED
+		numConnectedClients++;
+		
+		System.out.println("client connected");
+		System.out.println("client name (cert subject DN field): " + subject);
+		System.out.println("Issuer name (cert issuer DN field): " + issuer); //ALSO ADDED!!!!!!!!!
+		System.out.println("Certificate serial number: " + serialnumber); //THIS IS ALSO ADDED!!!
+		System.out.println(numConnectedClients + " concurrent connection(s)\n");
 
-            PrintWriter out = null;
-            BufferedReader in = null;
-            out = new PrintWriter(socket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		PrintWriter out = null;
+		BufferedReader in = null;
+		out = new PrintWriter(socket.getOutputStream(), true);
+		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            String clientMsg = null;
-            while ((clientMsg = in.readLine()) != null) {
-			    String rev = new StringBuilder(clientMsg).reverse().toString();
-                System.out.println("received '" + clientMsg + "' from client");
-                System.out.print("sending '" + rev + "' to client...");
-				out.println(rev);
+		String clientMsg = null;
+		while ((clientMsg = in.readLine()) != null) {
+			
+			System.out.println("received '" + clientMsg + "' from client");
+			if(clientMsg.equalsIgnoreCase("n")) {
+				out.println("Currently not implemented");
 				out.flush();
-                System.out.println("done\n");
 			}
-			in.close();
-			out.close();
-			socket.close();
-    	    numConnectedClients--;
-            System.out.println("client disconnected");
-            System.out.println(numConnectedClients + " concurrent connection(s)\n");
+			else if(clientMsg.equalsIgnoreCase("l")) {
+				out.println("Currently not implemented");
+				out.flush();
+			}
+			else if(clientMsg.equalsIgnoreCase("u")) {
+				out.println("Currently not implemented");
+				out.flush();
+			}
+			else if(clientMsg.equalsIgnoreCase("r")) {
+				out.println("Currently not implemented");
+				out.flush();
+			}
+			else {
+				out.println("Choose a real option nimrod");
+				out.flush();
+			}
+			System.out.println("done\n");
+		}
+		in.close();
+		out.close();
+		socket.close();
+		numConnectedClients--;
+		System.out.println("client disconnected");
+		System.out.println(numConnectedClients + " concurrent connection(s)\n");
 		} catch (IOException e) {
-            System.out.println("Client died: " + e.getMessage());
-            e.printStackTrace();
-            return;
+	System.out.println("Client died: " + e.getMessage());
+	e.printStackTrace();
+	return;
         }
     }
 
@@ -77,7 +89,7 @@ public class Server implements Runnable {
             ServerSocketFactory ssf = getServerSocketFactory(type);
             ServerSocket ss = ssf.createServerSocket(port);
             ((SSLServerSocket)ss).setNeedClientAuth(true); // enables client authentication
-            new Server(ss);
+            new server(ss);
         } catch (IOException e) {
             System.out.println("Unable to start Server: " + e.getMessage());
             e.printStackTrace();
