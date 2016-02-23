@@ -54,6 +54,8 @@ public class Client {
 		//VI gör antagande att både trust/key store är username + truststore/keystore
 		String userkey = new StringBuilder(username).append("keystore").toString();
 		String usertrust = new StringBuilder(username).append("truststore").toString();
+		
+		//Endast här för testing reasons.
 		System.out.println("So keystore is: " + userkey + "\n" + "And Truststore is: " + usertrust);
 
 		//Dessa är flyttade hit för att testa direkt ifall trust/key stores existerar.
