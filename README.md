@@ -6,7 +6,7 @@ Gjort denna text fil mest för att kunna kommentera om vad som gjorts.
 {{{
 Det finns nu en check som ber en att get username (vilekt då skulle representera att man drar ett keycard) 
 
-Sen behöver man skriva in ett password till detta.
+Sen behöver man skriva in ett password till detta, Lösenordet är dolt vid inskrivning.
 
 Jag har gjort ett antagande om att våra klient keystores och truststore kommer att ha namnen
 
