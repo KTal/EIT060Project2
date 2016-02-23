@@ -8,13 +8,14 @@ import auditing.Logger;
 
 public class Patient
 {
-	String socialSecNo;
-	String patientName;
-	String address;
-	String phoneNbr;
-	ArrayList<String> treatingDoctors;
-	int lastRunningNbr;
-	ArrayList<MedicalRecord> mrList;
+	private String socialSecNo;
+	private String patientName;
+	private String address;
+	private String phoneNbr;
+	private ArrayList<String> treatingDoctors;
+	private int lastRunningNbr;
+	private ArrayList<MedicalRecord> mrList;
+	
 	public Patient(String socialSecNo, String patientName, String address, 
 			String phoneNbr, ArrayList<String> treatingDoctors) {
 		super();
@@ -24,6 +25,11 @@ public class Patient
 		this.phoneNbr = phoneNbr;
 		this.treatingDoctors = treatingDoctors;
 		lastRunningNbr = 0;
+	}
+	
+	public String getPatientName()
+	{
+		return patientName;
 	}
 	
 	public String getSocialSecNo()

@@ -7,10 +7,10 @@ import medicalRecords.TransactionResult;
 
 public class NewMedRecCommand implements Command
 {
-	UserCredentials uc;
-	Patient pat;
-	MedicalRecord mr;
-	Logger log;
+	private UserCredentials uc;
+	private Patient pat;
+	private MedicalRecord mr;
+	private Logger log;
 
 	public NewMedRecCommand(UserCredentials uc, Patient pat, MedicalRecord mr, 
 			Logger log)

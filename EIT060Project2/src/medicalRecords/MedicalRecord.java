@@ -5,12 +5,12 @@ import java.text.SimpleDateFormat;
 
 public class MedicalRecord 
 {
-	int runningNbr;
-	String date;
-	String department;
-	String doctorName;
-	String nurseName;
-	String note;
+	private int runningNbr;
+	private String date;
+	private String department;
+	private String doctorName;
+	private String nurseName;
+	private String note;
 	
 	public MedicalRecord(String date, String department, 
 			String doctorName, String nurseName, String note) 

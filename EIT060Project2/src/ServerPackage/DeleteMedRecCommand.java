@@ -6,10 +6,10 @@ import medicalRecords.TransactionResult;
 
 public class DeleteMedRecCommand implements Command
 {
-	UserCredentials uc;
-	Patient pat;
-	int runningNbr;
-	Logger log;
+	private UserCredentials uc;
+	private Patient pat;
+	private int runningNbr;
+	private Logger log;
 
 	public DeleteMedRecCommand(UserCredentials uc, Patient pat, int runningNbr,
 			Logger log)

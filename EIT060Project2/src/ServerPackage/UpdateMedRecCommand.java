@@ -7,13 +7,12 @@ import medicalRecords.TransactionResult;
 
 public class UpdateMedRecCommand implements Command 
 {
-
-	UserCredentials uc;
-	Patient pat;
-	MedicalRecord mr;
-	int runningNbr;
-	String note;
-	Logger log;
+	private UserCredentials uc;
+	private Patient pat;
+	private MedicalRecord mr;
+	private int runningNbr;
+	private String note;
+	private Logger log;
 
 	public UpdateMedRecCommand(UserCredentials uc, Patient pat, MedicalRecord mr,
 			int runningNbr, String note, Logger log)

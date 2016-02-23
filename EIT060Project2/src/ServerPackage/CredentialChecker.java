@@ -6,10 +6,10 @@ import medicalRecords.Patient;
 
 public class CredentialChecker 
 {
-	UserCredentials uc;
-	Patient pat;
-	MedicalRecord mr;
-	Logger log;
+	private UserCredentials uc;
+	private Patient pat;
+	private MedicalRecord mr;
+	private Logger log;
 	
 	public CredentialChecker(UserCredentials uc, Patient pat,
 			MedicalRecord mr, Logger log)
@@ -124,15 +124,21 @@ public class CredentialChecker
 			sb.append("Access denied: ");
 		}
 		sb.append(tt.toString() + " for patient " + pat.getSocialSecNo());
-		sb.append(" requested by " + uc.getUserID() + " ");
-		sb.append(uc.getUc().toString() + " ");
+		sb.append(" requested by ");
+		if(uc.getUc() == UserCategory.Patient)
+		{
+			sb.append(pat.getPatientName() + " (");
+			sb.append(uc.getSocialSecNo());
+			sb.append(") ");
+		}
+		else
+		{
+			sb.append(uc.getName() + " ");
+		}
+
 		if(uc.getUc()== UserCategory.Doctor || uc.getUc()== UserCategory.Nurse)
 		{
-			sb.append(uc.getName() + " in department " + uc.getDepartment());
-		}
-		else if(uc.getUc()== UserCategory.Patient)
-		{
-			sb.append(uc.getSocialSecNo());
+			sb.append("in department " + uc.getDepartment());
 		}
 		
 		log.writeLog(sb.toString());

@@ -8,9 +8,9 @@ import medicalRecords.Patient;
 
 public class ReadMedRecCommand implements Command
 {
-	UserCredentials uc;
-	Patient pat;
-	Logger log;
+	private UserCredentials uc;
+	private Patient pat;
+	private Logger log;
 
 	public ReadMedRecCommand(UserCredentials uc, Patient pat, Logger log)
 	{

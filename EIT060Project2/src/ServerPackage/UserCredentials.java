@@ -2,16 +2,14 @@ package ServerPackage;
 
 public class UserCredentials 
 {
-	String userID;
-	UserCategory uc;
-	String name;
-	String socialSecNo;
-	String department;
+	private UserCategory uc;
+	private String name;
+	private String socialSecNo;
+	private String department;
 	
-	public UserCredentials(String userID, UserCategory uc, String name, 
+	public UserCredentials(UserCategory uc, String name, 
 			String socialSecNo, String department)
 	{
-		this.userID = userID;
 		this.uc = uc;
 		this.name = name;
 		this.socialSecNo = socialSecNo;
@@ -32,9 +30,5 @@ public class UserCredentials
 
 	public String getDepartment() {
 		return department;
-	}
-
-	public String getUserID() {
-		return userID;
 	}
 }
