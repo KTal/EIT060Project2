@@ -16,7 +16,11 @@ public class Server implements Runnable {
         serverSocket = ss;
         newListener();
     }
-
+    
+    public void working() {
+    	System.out.println("Does it work"); //Does it work when i add stuff?
+    }
+    
     public void run() {
         try {
             SSLSocket socket=(SSLSocket)serverSocket.accept();
