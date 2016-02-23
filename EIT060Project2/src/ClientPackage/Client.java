@@ -64,8 +64,6 @@ public class Client {
 		String passinput = passcheck.readLine();	//VI ANTAR här också att password är samma till key och trust
 		char[] password = passinput.toCharArray();
 		
-		passcheck.close();	//Closing the input
-
                 ks.load(keytest, password);  // keystore password (storepass)
 				ts.load(trusttest, password); // truststore password (storepass);
 				kmf.init(ks, password); // user password (keypass)
