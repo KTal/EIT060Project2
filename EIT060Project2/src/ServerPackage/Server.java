@@ -37,6 +37,32 @@ public class server implements Runnable {
 		BufferedReader in = null;
 		out = new PrintWriter(socket.getOutputStream(), true);
 		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		
+		//Here we check what the subjects security clearence is
+		if(subject.contains("Goverment")) {
+			out.println("Goverment");
+			out.flush();
+			//ADD Goverment security to ???
+		}
+		else if(subject.contains("Doctor")) {
+			out.println("Doctor");
+			out.flush();
+			//ADD Doctor security to ???
+		}
+		else if(subject.contains("Nurse")) {
+			out.println("Nurse");
+			out.flush();
+			//ADD Nurse security to ???
+		}
+		else if(subject.contains("Patient")) {
+			out.println("Patient");
+			out.flush();	
+			//ADD Patient security to ???
+		} else {
+			out.println("Ain't got no security");
+			out.flush();
+			//This is a test option, remove later
+		}
 
 		String clientMsg = null;
 		while ((clientMsg = in.readLine()) != null) {
