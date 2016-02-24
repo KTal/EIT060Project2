@@ -46,21 +46,21 @@ public class CredentialChecker
 				
 				if(uc.getUc() == UserCategory.Patient)
 				{
-					if(uc.getSocialSecNo() == pat.getSocialSecNo())
+					if(uc.getSocialSecNo().equals(pat.getSocialSecNo()))
 					{
 						accessGranted = true;
 					}
 				}			
 				else if(uc.getUc() == UserCategory.Nurse)
 				{
-					if(uc.getDepartment() == mr.getDepartment())
+					if(uc.getDepartment().equals(mr.getDepartment()))
 					{
 						accessGranted = true;
 					}
 				}
 				else if(uc.getUc() == UserCategory.Doctor)
 				{
-					if(uc.getDepartment() == mr.getDepartment())
+					if(uc.getDepartment().equals(mr.getDepartment()))
 					{
 						accessGranted = true;
 					}
@@ -75,14 +75,14 @@ public class CredentialChecker
 				
 				if(uc.getUc() == UserCategory.Nurse)
 				{
-					if(uc.getName() == mr.getNurseName())
+					if(uc.getName().equals(mr.getNurseName()))
 					{
 						accessGranted = true;
 					}
 				}
 				else if(uc.getUc() == UserCategory.Doctor)
 				{
-					if(uc.getName() == mr.getDoctorName())
+					if(uc.getName().equals(mr.getDoctorName()))
 					{
 						accessGranted = true;
 					}
@@ -111,25 +111,23 @@ public class CredentialChecker
 		return accessGranted;
 	}
 	
-	private void createMessage(Boolean accessGranted, TransactionType tt)
+	public void createMessage(Boolean accessGranted, TransactionType tt)
 	{
 		StringBuilder sb = new StringBuilder();
 		
 		if(accessGranted)
 		{
-			sb.append("Access granted: ");
+			sb.append("Access granted. ");
 		}
 		else
 		{
-			sb.append("Access denied: ");
+			sb.append("Access denied. ");
 		}
-		sb.append(tt.toString() + " for patient " + pat.getSocialSecNo());
+		sb.append("Transaction type: " + tt.toString() + " for patient " + pat.getSocialSecNo());
 		sb.append(" requested by ");
 		if(uc.getUc() == UserCategory.Patient)
 		{
-			sb.append(pat.getPatientName() + " (");
 			sb.append(uc.getSocialSecNo());
-			sb.append(") ");
 		}
 		else
 		{

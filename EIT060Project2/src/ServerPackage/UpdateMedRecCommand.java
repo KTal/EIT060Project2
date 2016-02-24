@@ -33,11 +33,11 @@ public class UpdateMedRecCommand implements Command
 		if(cc.checkCredentials(TransactionType.Update))
 		{
 			TransactionResult tr = pat.appendToMedicalRecord(runningNbr, note, log);
-			return "U#" + tr.toString() + "#";			
+			return "U#" + tr.toString();			
 		}
 		else
 		{
-			return "U#Access denied.#";
+			return "U#Access denied.";
 		}
 	}
 }

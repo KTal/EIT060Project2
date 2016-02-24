@@ -25,6 +25,7 @@ public class Patient
 		this.phoneNbr = phoneNbr;
 		this.treatingDoctors = treatingDoctors;
 		lastRunningNbr = 0;
+		mrList = new ArrayList<MedicalRecord>();
 	}
 	
 	public String getPatientName()

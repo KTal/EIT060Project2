@@ -66,20 +66,13 @@ public class MedicalRecord
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("RunNo: " );
-		sb.append(Integer.toString(runningNbr));
-		sb.append("\n");
-		
-		sb.append("Date: " );
-		Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateString = formatter.format(date);
-		sb.append(dateString);
-		sb.append("\n");
-		
-		sb.append("Department: " + department + "\n");
-		sb.append("Doctor: " + doctorName + "\n");
-		sb.append("Nurse: " + nurseName + "\n");
-		sb.append("Note: " + note  + "\n");
+		sb.append(" RunNo: " );
+		sb.append(Integer.toString(runningNbr));	
+		sb.append(" Date: " + date);		
+		sb.append(" Department: " + department);
+		sb.append(" Doctor: " + doctorName);
+		sb.append(" Nurse: " + nurseName);
+		sb.append(" Note: " + note);
 		
 		return sb.toString();
 	}

@@ -29,11 +29,11 @@ public class NewMedRecCommand implements Command
 		if(cc.checkCredentials(TransactionType.New))
 		{
 			TransactionResult tr = pat.addMedicalRecord(mr, log);
-			return "N#" + tr.toString() + "#";			
+			return "N#" + tr.toString();			
 		}
 		else
 		{
-			return "N#Access denied.#";
+			return "N#Access denied.";
 		}	
 	}
 

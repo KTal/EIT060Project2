@@ -26,7 +26,7 @@ public class ReadMedRecCommand implements Command
 		StringBuilder sb = new StringBuilder();
 		int medicalRecordsNbr = 0;
 		MedicalRecord mr;
-		CredentialChecker cc;
+		CredentialChecker cc = null;
 		
 		sb.append("R#");
 		for(int i = 0; i < mrList.size(); i++)
@@ -40,6 +40,9 @@ public class ReadMedRecCommand implements Command
 				{
 					sb.append("\nR#");
 				}
+
+				sb.append("Access granted.#");
+
 				medicalRecordsNbr++;
 				
 				sb.append(mr.getRunningNbr());
@@ -55,7 +58,18 @@ public class ReadMedRecCommand implements Command
 				sb.append(mr.getNote());
 			}
 		}
-		sb.append("#");
+		if(medicalRecordsNbr == 0)
+		{
+			sb.append("Access denied.");
+			if(cc != null)
+			{
+				cc.createMessage(false, TransactionType.Read);
+			}	
+		}
+		else
+		{
+			cc.createMessage(true, TransactionType.Read);
+		}
 		return sb.toString();
 	}
 }

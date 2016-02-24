@@ -28,11 +28,11 @@ public class DeleteMedRecCommand implements Command
 		if(cc.checkCredentials(TransactionType.Delete))
 		{
 			TransactionResult tr = pat.deleteMedicalRecord(runningNbr, log);
-			return "D#" + tr.toString() + "#";			
+			return "D#" + tr.toString();			
 		}
 		else
 		{
-			return "D#Access denied.#";
+			return "D#Access denied.";
 		}
 	}
 }
