@@ -39,7 +39,7 @@ public class Server implements Runnable {
 		ArrayList<String> doctors;
 		String socialSecNo;
 
-		socialSecNo = "6409021999";
+		socialSecNo = "8605121681";
 		doctors = new ArrayList<String>(Arrays.asList("Dr. Morpheus", "Dr. Trinity"));			
 		pat = new Patient(socialSecNo, "Thomas Anderson", "3 matrix Av.", "199920032003",
 				doctors);
@@ -48,7 +48,7 @@ public class Server implements Runnable {
 			patients.put(socialSecNo, pat);
 		}
 
-		socialSecNo = "1239021599";
+		socialSecNo = "7503101645";
 		doctors = new ArrayList<String>(Arrays.asList("Dr. Smith"));			
 		pat = new Patient(socialSecNo, "James Howlett", "10 Downing Street.", "656223",
 				doctors);
@@ -57,7 +57,7 @@ public class Server implements Runnable {
 			patients.put(socialSecNo, pat);
 		}
 
-		socialSecNo = "3404521959";
+		socialSecNo = "9510123218";
 		doctors = new ArrayList<String>(Arrays.asList("Dr. Trinity"));			
 		pat = new Patient(socialSecNo, "Donald Trump", "1 America Av.", "1234920042003",
 				doctors);
