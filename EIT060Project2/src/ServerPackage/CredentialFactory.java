@@ -24,9 +24,9 @@ public class CredentialFactory
 			{
 				uc = new UserCredentials(UserCategory.Patient, "", credentialsParts[1], "");
 			}
-			else if(credentialsParts[0].equals(UserCategory.GovernmentAgency.toString()))
+			else if(credentialsParts[0].equals(UserCategory.GovermentAgency.toString()))
 			{
-				uc = new UserCredentials(UserCategory.GovernmentAgency, credentialsParts[1], "", "");
+				uc = new UserCredentials(UserCategory.GovermentAgency, credentialsParts[1], "", "");
 			}
 		}
 		else if(credentialsLength == 3)

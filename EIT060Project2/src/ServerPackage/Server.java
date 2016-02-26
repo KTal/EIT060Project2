@@ -38,9 +38,18 @@ public class Server implements Runnable {
 		Patient pat;
 		ArrayList<String> doctors;
 		String socialSecNo;
+				
+		socialSecNo = "8712034582";
+		doctors = new ArrayList<String>(Arrays.asList("Doc Zed"));			
+		pat = new Patient(socialSecNo, "CSM", "Spartanburg, SC.", "20162201760",
+				doctors);
+		if(!patients.containsKey(socialSecNo))
+		{
+			patients.put(socialSecNo, pat);
+		}
 
-		socialSecNo = "8605121681";
-		doctors = new ArrayList<String>(Arrays.asList("Dr. Morpheus", "Dr. Trinity"));			
+		socialSecNo = "6409021999";
+		doctors = new ArrayList<String>(Arrays.asList("Dr. Morpheus", "Dr. Trinity", "Doc Zed"));			
 		pat = new Patient(socialSecNo, "Thomas Anderson", "3 matrix Av.", "199920032003",
 				doctors);
 		if(!patients.containsKey(socialSecNo))
@@ -135,7 +144,7 @@ public class Server implements Runnable {
 	public static void main(String args[]) 
 	{
 		// When testing.
-		//new Server();
+		new Server();
 
 		System.out.println("\nServer Started\n");
 		int port = -1;
@@ -163,6 +172,7 @@ public class Server implements Runnable {
 		createSomePatients();
 
 		ArrayList<String> clientRequests = new ArrayList<String>();
+		clientRequests.add("N#8712034582#2016-02-26#Surgery#Doc Zed#Nurse Ratched#Lack of faith disturbing.");
 		clientRequests.add("N#6409021999#2016-02-24#Oncology#Dr. Morpheus#Joker#Bad breath.");
 		clientRequests.add("N#6409021999#2016-02-24#Oncology#Dr. Morpheus#Joker#Broken brain.");
 		clientRequests.add("R#6409021999");
@@ -183,7 +193,12 @@ public class Server implements Runnable {
 		clientRequests.add("D#6409021999#2");
 		clientRequests.add("D#6409021999#2");
 		clientRequests.add("D#6409021999#2");
+		clientRequests.add("R#8712034582");
+		clientRequests.add("N#9510123218#2016-02-26#Radiology#Dr. Trinity#Nurse Joy#Illuminescent Hypertrichosis.");
+		clientRequests.add("R#9510123218");
+		
 		ArrayList<String> credSubject = new ArrayList<String>();
+		credSubject.add("Doctor#Doc Zed#Surgery");
 		credSubject.add("Nurse#Joker#Oncology");
 		credSubject.add("Doctor#Dr. Morpheus#Oncology");
 		credSubject.add("Patient#3404521959");
@@ -192,7 +207,7 @@ public class Server implements Runnable {
 		credSubject.add("Doctor#Dr. Morpheus#Oncology");
 		credSubject.add("Doctor#Dr. Smith#Psychiatry");
 		credSubject.add("Patient#6409021999");
-		credSubject.add("Patient#3404521959");
+		credSubject.add("Patient#9510123218");
 		credSubject.add("Nurse#Joker#Oncology");
 		credSubject.add("Doctor#Dr. Morpheus#Oncology");
 		credSubject.add("Doctor#Dr. Morpheus#Oncology");
@@ -204,7 +219,9 @@ public class Server implements Runnable {
 		credSubject.add("Doctor#Dr. Morpheus#Oncology");
 		credSubject.add("Nurse#Joker#Oncology");
 		credSubject.add("Patient#6409021999");
-
+		credSubject.add("Nurse#Nurse Joy#Radiology");
+		credSubject.add("Doctor#Dr. Trinity#Radiology");
+		credSubject.add("Nurse#Nurse Joy#Radiology");
 
 		Logger log = new Logger();
 		CredentialFactory credFac = new CredentialFactory(log);
