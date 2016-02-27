@@ -27,7 +27,7 @@ public class Server implements Runnable {
 	{
 		log = new Logger();
 		//test();
-		test2();
+		//test2();
 	}
 
 	public Server(ServerSocket ss) throws IOException 
@@ -152,7 +152,7 @@ public class Server implements Runnable {
 	public static void main(String args[]) 
 	{
 		// When testing.
-		new Server();
+		//new Server();
 
 		System.out.println("\nServer Started\n");
 		int port = -1;
