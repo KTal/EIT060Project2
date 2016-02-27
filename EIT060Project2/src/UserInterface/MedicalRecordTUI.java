@@ -24,6 +24,9 @@ public class MedicalRecordTUI
 	{
 		StringBuilder commandString = new StringBuilder();
 		String com;
+		
+		String commandLetters = "NRUDQ";
+		int index = -1;
 
 		try 
 		{
@@ -32,8 +35,9 @@ public class MedicalRecordTUI
 				System.out.println("\nN - Add record\nR - Read record\nU - Update record\nD - Delete record\nQ - Quit");
 				System.out.print(">> ");
 				com = in.readLine().trim().toUpperCase();
+				index = commandLetters.indexOf(com);
 			}
-			while(com.length() != 1 || !com.matches("NRUDQ"));
+			while(com.length() != 1 || index == -1);
 
 			System.out.println("");
 			switch(com)
@@ -74,36 +78,35 @@ public class MedicalRecordTUI
 	{
 		StringBuilder commandString = new StringBuilder();
 		commandString.append("N#");
-		
-		Date dt = new Date();
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-		commandString.append((ft.format(dt)));
-		commandString.append("#");
-		
-		System.out.print("Department: ");
+
 		try 
 		{
-			String department  = in.readLine();
+			commandString.append(getSocialSecNo());
+			commandString.append("#");
+			
+			Date dt = new Date();
+			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			commandString.append((ft.format(dt)));
+			commandString.append("#");
+			
+			System.out.print("Department: ");
+			String department  = in.readLine().trim();
 			commandString.append(department);
 			commandString.append("#");
-			System.out.println();
 			
 			System.out.print("Treating doctor: ");
-			String doctorName  = in.readLine();
+			String doctorName  = in.readLine().trim();
 			commandString.append(doctorName);
 			commandString.append("#");
-			System.out.println();
 			
 			System.out.print("Treating nurse: ");
-			String nurseName  = in.readLine();
+			String nurseName  = in.readLine().trim();
 			commandString.append(nurseName);
 			commandString.append("#");
-			System.out.println();
 			
 			System.out.print("Note: ");
-			String note  = in.readLine();
+			String note  = in.readLine().trim();
 			commandString.append(note);
-			System.out.println();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -124,22 +127,23 @@ public class MedicalRecordTUI
 	private String getUpdateCommand()
 	{
 		StringBuilder commandString = new StringBuilder();
+		
+		commandString.append("U#");
+		commandString.append(getSocialSecNo());
+		commandString.append("#");
+		
 		String runningNbr = getRunningNbr();
 		
 		if(runningNbr.length() > 0)
-		{
-			commandString.append("U#");
-			commandString.append(getSocialSecNo());
-			commandString.append("#");
+		{						
 			commandString.append(runningNbr);
 			
 			System.out.print("Note: ");
 			try 
 			{
-				String note  = in.readLine();
+				String note  = in.readLine().trim();
 				commandString.append("#");
 				commandString.append(note);
-				System.out.println("");
 			} 
 			catch (IOException e) 
 			{
@@ -147,20 +151,31 @@ public class MedicalRecordTUI
 				e.printStackTrace();
 			}
 		}
+		else
+		{
+			commandString.setLength(0);
+		}
 		return commandString.toString();
 	}
 
 	private String getDeleteCommand()
 	{
 		StringBuilder commandString = new StringBuilder();
+		
+		commandString.append("D#");
+		commandString.append(getSocialSecNo());
+		commandString.append("#");
+		
 		String runningNbr = getRunningNbr();
 		
 		if(runningNbr.length() > 0)
 		{
-			commandString.append("D#");
-			commandString.append(getSocialSecNo());
-			commandString.append("#");
+			
 			commandString.append(runningNbr);
+		}
+		else
+		{
+			commandString.setLength(0);
 		}
 		return commandString.toString();
 	}
@@ -171,14 +186,13 @@ public class MedicalRecordTUI
 		System.out.print("SocialSecurityNo: ");
 		try 
 		{
-			socialSecNo  = in.readLine();
+			socialSecNo  = in.readLine().trim();
 		} 
 		catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("");
 		return socialSecNo;
 	}
 	
@@ -188,7 +202,7 @@ public class MedicalRecordTUI
 		System.out.print("RunningNbr: ");
 		try 
 		{
-			runningNbr  = in.readLine();
+			runningNbr  = in.readLine().trim();
 			try 
 			{ 
 		        int runNo = Integer.parseInt(runningNbr); 
@@ -202,7 +216,6 @@ public class MedicalRecordTUI
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("");
 		return runningNbr;
 	}
 
@@ -248,11 +261,11 @@ public class MedicalRecordTUI
 				j = i * 8 + 2;
 				
 				System.out.print("#" + resultParts[j]);
-				System.out.print(" " + resultParts[j+1]);
-				System.out.print(" Department: " + resultParts[j+2]);
-				System.out.print(" Treating doctor: " + resultParts[j+3]);
-				System.out.print(" Treating nurse: " + resultParts[j+4]);
-				System.out.print(" Note: " + resultParts[j+5]);
+				System.out.println(" " + resultParts[j+1]);
+				System.out.println("Department: " + resultParts[j+2]);
+				System.out.println("Treating doctor: " + resultParts[j+3]);
+				System.out.println("Treating nurse: " + resultParts[j+4]);
+				System.out.println("Note: " + resultParts[j+5]);
 			}
 			System.out.println();
 		}

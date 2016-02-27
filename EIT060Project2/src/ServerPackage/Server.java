@@ -10,7 +10,9 @@ import javax.net.*;
 import javax.net.ssl.*;
 import javax.security.cert.X509Certificate;
 
+import UserInterface.MedicalRecordTUI;
 import auditing.Logger;
+import medicalRecords.MedicalRecord;
 import medicalRecords.Patient;
 
 import java.math.BigInteger;
@@ -19,14 +21,18 @@ public class Server implements Runnable {
 	private ServerSocket serverSocket = null;
 	private static int numConnectedClients = 0;
 	private HashMap<String, Patient> patients;
+	private Logger log;
 
 	public Server()
 	{
-		test();
+		log = new Logger();
+		//test();
+		test2();
 	}
 
 	public Server(ServerSocket ss) throws IOException 
 	{
+		log = new Logger();
 		serverSocket = ss;
 		createSomePatients();
 		newListener();
@@ -47,6 +53,9 @@ public class Server implements Runnable {
 		{
 			patients.put(socialSecNo, pat);
 		}
+		MedicalRecord mr = new MedicalRecord("2016-02-24", "Radiology", 
+				"Dr. Trinity", "Nurse Joy", "Illuminescent Hypertrichosis.");
+		pat.addMedicalRecord(mr, log);
 
 		socialSecNo = "6409021999";
 		doctors = new ArrayList<String>(Arrays.asList("Dr. Morpheus", "Dr. Trinity", "Doc Zed"));			
@@ -98,7 +107,6 @@ public class Server implements Runnable {
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-			Logger log = new Logger();
 			CredentialFactory credFac = new CredentialFactory(log);
 			UserCredentials uc = credFac.createCredentials(subject);
 
@@ -223,7 +231,6 @@ public class Server implements Runnable {
 		credSubject.add("Doctor#Dr. Trinity#Radiology");
 		credSubject.add("Nurse#Nurse Joy#Radiology");
 
-		Logger log = new Logger();
 		CredentialFactory credFac = new CredentialFactory(log);
 		UserCredentials uc;
 		CommandFactory comFac = new CommandFactory();
@@ -247,6 +254,46 @@ public class Server implements Runnable {
 				}
 			}
 		}
+		System.exit(0);
+	}
+	
+	public void test2()
+	{
+		createSomePatients();
+
+		MedicalRecordTUI mrTUI = new MedicalRecordTUI();
+		
+		String clientRequest = "";
+		String credSubject = "Doctor#Doc Zed#Surgery";
+
+		CredentialFactory credFac = new CredentialFactory(log);
+		UserCredentials uc;
+		CommandFactory comFac = new CommandFactory();
+		Command com;
+		String results = "";
+		
+		uc = credFac.createCredentials(credSubject);
+		
+		do
+		{
+			clientRequest = mrTUI.inputCommand();
+			
+			if(!clientRequest.equals(""))
+			{
+				com = comFac.createCommand(clientRequest, uc, patients, log);	
+				if(com != null)
+				{
+					results = com.execute();
+					mrTUI.displayResults(results);
+				}
+				else
+				{
+					System.out.println("Invalid request: " + clientRequest);
+				}
+			}	
+		}
+		while(!clientRequest.equals(""));
+	
 		System.exit(0);
 	}
 
