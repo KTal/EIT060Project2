@@ -38,7 +38,7 @@ public class ReadMedRecCommand implements Command
 			{
 				if(medicalRecordsNbr > 0)
 				{
-					sb.append("\nR#");
+					sb.append("#R#");
 				}
 
 				sb.append("Access granted.#");

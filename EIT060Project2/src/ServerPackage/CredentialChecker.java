@@ -65,7 +65,7 @@ public class CredentialChecker
 						accessGranted = true;
 					}
 				}
-				else if(uc.getUc() == UserCategory.GovermentAgency)
+				else if(uc.getUc() == UserCategory.GovernmentAgency)
 				{
 					accessGranted = true;
 				}
@@ -92,7 +92,7 @@ public class CredentialChecker
 				
 			case Delete:
 				
-				if(uc.getUc() == UserCategory.GovermentAgency)
+				if(uc.getUc() == UserCategory.GovernmentAgency)
 				{
 					accessGranted = true;
 				}

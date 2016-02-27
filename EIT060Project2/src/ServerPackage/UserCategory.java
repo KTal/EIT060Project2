@@ -5,5 +5,5 @@ public enum UserCategory
 	Patient,
 	Doctor,
 	Nurse,
-	GovermentAgency
+	GovernmentAgency
 }
