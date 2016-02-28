@@ -60,7 +60,7 @@ public class Server implements Runnable {
 				"Nurse Ratched", "Has developed Pinkeye in the left eye.");
 		pat.addMedicalRecord(mr, log);
 		mr = new MedicalRecord("2016-02-27", "Surgery", 
-				"Nurse Ratched", "Has developed Pinkeye in the left eye.");
+				"Nurse Ratched", "Has developed Pinkeye in the right eye.");
 		pat.addMedicalRecord(mr, log);
 		mr = new MedicalRecord("2016-02-27", "Psychiatry", 
 				"Nurse Oracle", "Believes himself to suffer from a combination of Purity and Re-vitiligo.");
