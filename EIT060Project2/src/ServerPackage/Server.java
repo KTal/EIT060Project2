@@ -26,7 +26,7 @@ public class Server implements Runnable {
 	public Server()
 	{
 		log = new Logger();
-		//test();
+//		test();
 		//test2();
 	}
 
@@ -53,20 +53,30 @@ public class Server implements Runnable {
 		{
 			patients.put(socialSecNo, pat);
 		}
+		
 		MedicalRecord mr = new MedicalRecord("2016-02-24", "Surgery", 
 				"Nurse Ratched", "A clear case of the Hinamizawa Syndrome.");
+		mr.setDoctorName("Doc Zed");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-25", "Surgery", 
 				"Nurse Ratched", "Has developed Pinkeye in the left eye.");
+		mr.setDoctorName("Doc Zed");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-27", "Surgery", 
 				"Nurse Ratched", "Has developed Pinkeye in the right eye.");
+		mr.setDoctorName("Doc Zed");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-27", "Psychiatry", 
 				"Nurse Oracle", "Believes himself to suffer from a combination of Purity and Re-vitiligo.");
+		mr.setDoctorName("Dr. Smith");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-28", "Surgery", 
 				"Nurse Ratched", "In the terminal stage of FoxDie. Rest in pieces.");
+		mr.setDoctorName("Doc Zed");
 		pat.addMedicalRecord(mr, log);
 				
 		socialSecNo = "8712034582";
@@ -77,14 +87,20 @@ public class Server implements Runnable {
 		{
 			patients.put(socialSecNo, pat);
 		}
+		
 		mr = new MedicalRecord("2016-02-24", "Radiology", 
 				"Nurse Joy", "Illuminescent Hypertrichosis.");
+		mr.setDoctorName("Dr. Trinity");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-27", "Surgery", 
 				"Nurse Ratched", "Space AIDS.");
+		mr.setDoctorName("Doc Zed");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-28", "Surgery", 
 				"Nurse Ratched", "Unstuck in time.");
+		mr.setDoctorName("Doc Zed");
 		pat.addMedicalRecord(mr, log);
 
 		socialSecNo = "6409021999";
@@ -95,8 +111,10 @@ public class Server implements Runnable {
 		{
 			patients.put(socialSecNo, pat);
 		}
+		
 		mr = new MedicalRecord("2016-02-26", "Oncology", 
 				"Joker", "Plague of Insomnia. Prescribed plenty of red pills.");
+		mr.setDoctorName("Dr. Morpheus");
 		pat.addMedicalRecord(mr, log);
 
 		socialSecNo = "7503101645";
@@ -107,11 +125,15 @@ public class Server implements Runnable {
 		{
 			patients.put(socialSecNo, pat);
 		}
+		
 		mr = new MedicalRecord("2016-02-25", "Radiology", 
 				"Nurse Joy", "Has contracted Cutie Pox browsing Reddit.");
+		mr.setDoctorName("Dr. Trinity");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-27", "Radiology", 
 				"Nurse Joy", "Somehow contracted Cyberbrain Sclerosis!");
+		mr.setDoctorName("Dr. Trinity");
 		pat.addMedicalRecord(mr, log);
 
 		socialSecNo = "9510123218";
@@ -122,11 +144,15 @@ public class Server implements Runnable {
 		{
 			patients.put(socialSecNo, pat);
 		}
+		
 		mr = new MedicalRecord("2016-02-25", "Radiology", 
 				"Nurse Joy", "Black Trump Virus.");
+		mr.setDoctorName("Dr. Trinity");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-28", "Radiology", 
 				"Nurse Joy", "Contracted Geostigma eating canned corn.");
+		mr.setDoctorName("Dr. Trinity");
 		pat.addMedicalRecord(mr, log);
 		
 		socialSecNo = "0410042008";
@@ -137,14 +163,20 @@ public class Server implements Runnable {
 		{
 			patients.put(socialSecNo, pat);
 		}
+		
 		mr = new MedicalRecord("2016-02-27", "Surgery", 
 				"Nurse Ratched", "Has contracted the deadly Japanese flu.");
+		mr.setDoctorName("Doc Zed");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-27", "Radiology", 
 				"Nurse Joy", "A severe case of the Red Death.");
+		mr.setDoctorName("Dr. Trinity");
 		pat.addMedicalRecord(mr, log);
+		
 		mr = new MedicalRecord("2016-02-28", "Oncology", 
 				"Joker", "The sickest patient I've ever seen. Has been infected with the T-virus.");
+		mr.setDoctorName("Dr. Morpheus");
 		pat.addMedicalRecord(mr, log);
 	}
 
@@ -232,7 +264,7 @@ public class Server implements Runnable {
 	public static void main(String args[]) 
 	{
 		// When testing.
-		//new Server();
+//		new Server();
 
 		System.out.println("\nServer Started\n");
 		int port = -1;
@@ -260,6 +292,7 @@ public class Server implements Runnable {
 		createSomePatients();
 
 		ArrayList<String> clientRequests = new ArrayList<String>();
+		clientRequests.add("R#7312131415");
 		clientRequests.add("N#8712034582#2016-02-26#Surgery#Doc Zed#Nurse Ratched#Lack of faith disturbing.");
 		clientRequests.add("N#6409021999#2016-02-24#Oncology#Dr. Morpheus#Joker#Bad breath.");
 		clientRequests.add("N#6409021999#2016-02-24#Oncology#Dr. Morpheus#Joker#Broken brain.");
@@ -286,6 +319,7 @@ public class Server implements Runnable {
 		clientRequests.add("R#9510123218");
 		
 		ArrayList<String> credSubject = new ArrayList<String>();
+		credSubject.add("Doctor#Doc Zed#Surgery");
 		credSubject.add("Doctor#Doc Zed#Surgery");
 		credSubject.add("Nurse#Joker#Oncology");
 		credSubject.add("Doctor#Dr. Morpheus#Oncology");
