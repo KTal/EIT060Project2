@@ -44,17 +44,47 @@ public class Server implements Runnable {
 		Patient pat;
 		ArrayList<String> doctors;
 		String socialSecNo;
+		
+		socialSecNo = "7312131415";
+		doctors = new ArrayList<String>(Arrays.asList("Doc Zed", "Dr. Smith"));			
+		pat = new Patient(socialSecNo, "Tyrone Slothrop", "London", "760161803398874",
+				doctors);
+		if(!patients.containsKey(socialSecNo))
+		{
+			patients.put(socialSecNo, pat);
+		}
+		MedicalRecord mr = new MedicalRecord("2016-02-24", "Surgery", 
+				"Nurse Ratched", "A clear case of the Hinamizawa Syndrome.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-25", "Surgery", 
+				"Nurse Ratched", "Has developed Pinkeye in the left eye.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-27", "Surgery", 
+				"Nurse Ratched", "Has developed Pinkeye in the left eye.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-27", "Psychiatry", 
+				"Nurse Oracle", "Believes himself to suffer from a combination of Purity and Re-vitiligo.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-28", "Surgery", 
+				"Nurse Ratched", "In the terminal stage of FoxDie. Rest in pieces.");
+		pat.addMedicalRecord(mr, log);
 				
 		socialSecNo = "8712034582";
-		doctors = new ArrayList<String>(Arrays.asList("Doc Zed"));			
+		doctors = new ArrayList<String>(Arrays.asList("Dr. Trinity", "Doc Zed"));			
 		pat = new Patient(socialSecNo, "CSM", "Spartanburg, SC.", "20162201760",
 				doctors);
 		if(!patients.containsKey(socialSecNo))
 		{
 			patients.put(socialSecNo, pat);
 		}
-		MedicalRecord mr = new MedicalRecord("2016-02-24", "Radiology", 
+		mr = new MedicalRecord("2016-02-24", "Radiology", 
 				"Nurse Joy", "Illuminescent Hypertrichosis.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-27", "Surgery", 
+				"Nurse Ratched", "Space AIDS.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-28", "Surgery", 
+				"Nurse Ratched", "Unstuck in time.");
 		pat.addMedicalRecord(mr, log);
 
 		socialSecNo = "6409021999";
@@ -65,24 +95,57 @@ public class Server implements Runnable {
 		{
 			patients.put(socialSecNo, pat);
 		}
+		mr = new MedicalRecord("2016-02-26", "Oncology", 
+				"Joker", "Plague of Insomnia. Prescribed plenty of red pills.");
+		pat.addMedicalRecord(mr, log);
 
 		socialSecNo = "7503101645";
-		doctors = new ArrayList<String>(Arrays.asList("Dr. Smith"));			
+		doctors = new ArrayList<String>(Arrays.asList("Dr. Smith", "Dr. Trinity"));			
 		pat = new Patient(socialSecNo, "James Howlett", "10 Downing Street.", "656223",
 				doctors);
 		if(!patients.containsKey(socialSecNo))
 		{
 			patients.put(socialSecNo, pat);
 		}
+		mr = new MedicalRecord("2016-02-25", "Radiology", 
+				"Nurse Joy", "Has contracted Cutie Pox browsing Reddit.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-27", "Radiology", 
+				"Nurse Joy", "Somehow contracted Cyberbrain Sclerosis!");
+		pat.addMedicalRecord(mr, log);
 
 		socialSecNo = "9510123218";
 		doctors = new ArrayList<String>(Arrays.asList("Dr. Trinity"));			
-		pat = new Patient(socialSecNo, "Donald Trump", "1 America Av.", "1234920042003",
+		pat = new Patient(socialSecNo, "Donald Trump", "1600 Pennsylvania Ave NW, Washington.", "1234920042003",
 				doctors);
 		if(!patients.containsKey(socialSecNo))
 		{
 			patients.put(socialSecNo, pat);
 		}
+		mr = new MedicalRecord("2016-02-25", "Radiology", 
+				"Nurse Joy", "Black Trump Virus.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-28", "Radiology", 
+				"Nurse Joy", "Contracted Geostigma eating canned corn.");
+		pat.addMedicalRecord(mr, log);
+		
+		socialSecNo = "0410042008";
+		doctors = new ArrayList<String>(Arrays.asList("Doc Zed", "Dr. Trinity", "Dr. Morpheus"));			
+		pat = new Patient(socialSecNo, "Dojima Nanako", "Inaba", "200822082009",
+				doctors);
+		if(!patients.containsKey(socialSecNo))
+		{
+			patients.put(socialSecNo, pat);
+		}
+		mr = new MedicalRecord("2016-02-27", "Surgery", 
+				"Nurse Ratched", "Has contracted the deadly Japanese flu.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-27", "Radiology", 
+				"Nurse Joy", "A severe case of the Red Death.");
+		pat.addMedicalRecord(mr, log);
+		mr = new MedicalRecord("2016-02-28", "Oncology", 
+				"Joker", "The sickest patient I've ever seen. Has been infected with the T-virus.");
+		pat.addMedicalRecord(mr, log);
 	}
 
 	public void run() {
