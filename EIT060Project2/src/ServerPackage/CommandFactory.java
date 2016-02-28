@@ -30,7 +30,7 @@ public class CommandFactory
 				switch(commandParts[0])
 				{
 				case "N":
-					if(commandParts.length == 7)
+					if(commandParts.length == 6)
 					{
 						mr = checkMedicalRecordSyntax(commandParts);
 						if(mr != null)
@@ -120,7 +120,7 @@ public class CommandFactory
 			}
 		}
 		mr = new MedicalRecord(commandParts[2], commandParts[3], commandParts[4],
-				commandParts[5], commandParts[6]);
+				commandParts[5]);
 		return mr;
 	}
 }

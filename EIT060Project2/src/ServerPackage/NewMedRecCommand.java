@@ -28,6 +28,7 @@ public class NewMedRecCommand implements Command
 
 		if(cc.checkCredentials(TransactionType.New))
 		{
+			mr.setDoctorName(uc.getName());
 			TransactionResult tr = pat.addMedicalRecord(mr, log);
 			return "N#" + tr.toString();			
 		}

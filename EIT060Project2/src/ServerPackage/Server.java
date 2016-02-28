@@ -54,7 +54,7 @@ public class Server implements Runnable {
 			patients.put(socialSecNo, pat);
 		}
 		MedicalRecord mr = new MedicalRecord("2016-02-24", "Radiology", 
-				"Dr. Trinity", "Nurse Joy", "Illuminescent Hypertrichosis.");
+				"Nurse Joy", "Illuminescent Hypertrichosis.");
 		pat.addMedicalRecord(mr, log);
 
 		socialSecNo = "6409021999";
@@ -108,6 +108,23 @@ public class Server implements Runnable {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
 			CredentialFactory credFac = new CredentialFactory(log);
+			
+			int firstcheck = subject.indexOf("CN=\"") + 4;
+		    int secondcheck = subject.indexOf("\", OU=");
+		    if(secondcheck > firstcheck)
+		    {
+		    	subject = subject.substring(firstcheck, secondcheck);
+		    }
+		      
+//			String[] credParts = subject.split("\\,", -1);
+//			String cred = credParts[0];
+//			int credLength = cred.length();
+//			
+//			if(credLength > 5)
+//			{
+//				cred = cred.substring(4, credLength - 2);
+//			}
+			
 			UserCredentials uc = credFac.createCredentials(subject);
 
 			if(uc != null)

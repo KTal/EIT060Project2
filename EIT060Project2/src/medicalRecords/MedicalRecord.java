@@ -12,13 +12,12 @@ public class MedicalRecord
 	private String nurseName;
 	private String note;
 	
-	public MedicalRecord(String date, String department, 
-			String doctorName, String nurseName, String note) 
+	public MedicalRecord(String date, String department, String nurseName, String note) 
 	{
 		this.runningNbr = 0;
 		this.date = date;
 		this.department = department;
-		this.doctorName = doctorName;
+		this.doctorName = "";
 		this.nurseName = nurseName;
 		this.note = note;
 	}
@@ -51,6 +50,11 @@ public class MedicalRecord
 	public void setNote(String note)
 	{
 		this.note = note;
+	}
+	
+	public void setDoctorName(String doctorName)
+	{
+		this.doctorName = doctorName;
 	}
 	
 	public int getRunningNbr()

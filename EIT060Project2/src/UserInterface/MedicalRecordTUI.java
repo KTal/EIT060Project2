@@ -94,10 +94,10 @@ public class MedicalRecordTUI
 			commandString.append(department);
 			commandString.append("#");
 			
-			System.out.print("Treating doctor: ");
-			String doctorName  = in.readLine().trim();
-			commandString.append(doctorName);
-			commandString.append("#");
+//			System.out.print("Treating doctor: ");
+//			String doctorName  = in.readLine().trim();
+//			commandString.append(doctorName);
+//			commandString.append("#");
 			
 			System.out.print("Treating nurse: ");
 			String nurseName  = in.readLine().trim();
@@ -240,7 +240,11 @@ public class MedicalRecordTUI
 				default:
 					break;
 			}
-		}		
+		}
+		else
+		{
+			System.out.println(resultParts[0]);
+		}
 	}
 	
 	private void displayReadResults(String[] resultParts)

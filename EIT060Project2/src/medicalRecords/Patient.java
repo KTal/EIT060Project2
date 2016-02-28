@@ -97,7 +97,7 @@ public class Patient
 		    MedicalRecord mr = i.next();
 		    if( mr.getRunningNbr() == runningNbr)
 		    {
-		    	String oldNote = mr.getNote().concat("\n");
+		    	String oldNote = mr.getNote().concat(" ");
 		    	String newNote = oldNote.concat(appendNote);
 		    	mr.setNote(newNote);
 		    	i.set(mr);
